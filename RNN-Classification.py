@@ -131,6 +131,94 @@ def evaluate(X, y):
         total_count += label.size(0)
     return total_acc / total_count
 
+
+def evaluate_confusion_matrix(X, y, genres):
+    model.eval()
+    confusion_matrix = {}
+
+    for idx, (text, label) in enumerate(zip(X, y)):
+        predicted_label = predict(text)
+        predicted_genre_item = predicted_label.argmax(1).item()
+        true_genre_item = label.item()
+
+        true_genre=genres[true_genre_item]
+        predicted_genre=genres[predicted_genre_item]
+
+        if true_genre not in confusion_matrix:
+            confusion_matrix[true_genre] = {'tp': 0, 'fn': 0, 'fp': 0, 'tn': 0}
+
+        if true_genre == predicted_genre:
+            confusion_matrix[true_genre]['tp'] += 1
+        else:
+            confusion_matrix[true_genre]['fn'] += 1
+            if predicted_genre not in confusion_matrix:
+                confusion_matrix[predicted_genre] = {'tp': 0, 'fn': 0, 'fp': 0, 'tn': 0}
+            confusion_matrix[predicted_genre]['fp'] += 1
+
+        for cls in genres:
+            if cls != true_genre and cls != predicted_genre:
+                if cls not in confusion_matrix:
+                    confusion_matrix[cls] = {'tp': 0, 'fn': 0, 'fp': 0, 'tn': 0}
+                confusion_matrix[cls]['tn'] += 1
+
+    return confusion_matrix
+
+def calculate_f_measures(confusion_matrix, beta):
+        macro_precision = 0                 #calculating macro F measure
+        macro_recall = 0
+
+        for cls, matrix in confusion_matrix.items():
+            tp = matrix['tp']
+            fn = matrix['fn']
+            fp = matrix['fp']
+
+            if tp + fp == 0:                    #Prevention of division by 0
+                precision = 0
+            else:
+                precision = tp / (tp + fp)
+
+            if tp + fn == 0:
+                recall = 0
+            else:
+                recall = tp / (tp + fn)
+
+            macro_precision += precision
+            macro_recall += recall
+
+        macro_precision =macro_precision/len(matrix)
+        macro_recall = macro_recall/len(matrix)
+
+        if macro_precision + macro_recall == 0:
+            macro_f1 = 0
+        else:
+            macro_f1 = (1+beta**2) * macro_precision * macro_recall / ((beta**2)*macro_precision + macro_recall)
+
+        tp_micro = 0                #Calculating micro F measure
+        fp_micro = 0
+        fn_micro = 0
+
+        for cls, matrix in confusion_matrix.items():
+            tp_micro += matrix['tp']
+            fn_micro += matrix['fn']
+            fp_micro += matrix['fp']
+
+        if tp_micro + fp_micro == 0:
+            micro_precision = 0
+        else:
+            micro_precision = tp_micro / (tp_micro + fp_micro)
+
+        if tp_micro + fn_micro == 0:
+            micro_recall = 0
+        else:
+            micro_recall = tp_micro / (tp_micro + fn_micro)
+
+        if micro_precision + micro_recall == 0:
+            micro_f1 = 0
+        else:
+            micro_f1 = (1+beta**2) * micro_precision * micro_recall / ((beta**2)*micro_precision + micro_recall)
+
+        return macro_f1,micro_f1
+
     
 if __name__=="__main__":
 
@@ -198,11 +286,19 @@ if __name__=="__main__":
 
         print(f"Epoch: {epoch}, validation loss: {valid_loss/len(X_valid)}. Accuracy: {accuracy/total_count}")
 
-    print(all_losses)
     plt.figure()
     plt.plot(all_losses)
 
     accuracy = evaluate(X_test, y_test)
     print(f"Accuracy on test set: {accuracy}")
+
+    matrix=evaluate_confusion_matrix(X_test,y_test,genres)
+
+    macro_measure, micro_measure=calculate_f_measures(matrix,1)
+
+    print(macro_measure)
+    print(micro_measure)
+
+
 
     
