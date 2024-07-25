@@ -34,6 +34,7 @@ The accuracy of the algorithms was evaluated using a confusion matrix. Based on 
     pip install -r requirements.txt
     ```
 5. **Running**:
+   
    Depending on which algorithm you want to use, you should start the corresponding script:
    For K-Nearest Neighbors algorithm
    ```
