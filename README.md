@@ -5,9 +5,9 @@
 The goal of this project is to develop an algorithm for determining a movie's genre based on its description. Natural language processing techniques were used to analyze textual descriptions, and movies were classified into appropriate genres.
 
 # Algorithms
-1. ** K-Nearest Neighbors **
-2. ** Naive Bayes **
-3. ** Recurrent Neural Network **
+1. **K-Nearest Neighbors**
+2. **Naive Bayes**
+3. **Recurrent Neural Network**
 
 # Evaluation
 
@@ -33,17 +33,17 @@ The accuracy of the algorithms was evaluated using a confusion matrix. Based on 
     ```
     pip install -r requirements.txt
     ```
-5. **Running**
+5. **Running**:
    Depending on which algorithm you want to use, you should start the corresponding script:
-   1. For K-Nearest Neighbors algorithm
+   For K-Nearest Neighbors algorithm
    ```
    python3 Knn-algorithm.py
    ```
-   2. For Naive Bayes algorithm
+   For Naive Bayes algorithm
    ```
    python3 Naive-Bayes-algorithm.py
    ```
-   3. For Recurrent Neural Network
+   For Recurrent Neural Network
     ```
    python3 RNN-Classification.py
    ```  
