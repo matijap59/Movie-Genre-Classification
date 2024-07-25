@@ -17,7 +17,7 @@ The accuracy of the algorithms was evaluated using a confusion matrix. Based on 
 
 1. **Clone the Repository**:
     ```
-    git@github.com:matijap59/Movie-Genre-Classification.git
+    git clone git@github.com:matijap59/Movie-Genre-Classification.git
     ```
 2. **Create Virtual Environment**:
     ```
