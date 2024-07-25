@@ -36,6 +36,7 @@ The accuracy of the algorithms was evaluated using a confusion matrix. Based on 
 5. **Running**:
    
    Depending on which algorithm you want to use, you should start the corresponding script:
+   
    For K-Nearest Neighbors algorithm
    ```
    python3 Knn-algorithm.py
