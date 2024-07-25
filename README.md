@@ -25,9 +25,9 @@ The accuracy of the algorithms was evaluated using a confusion matrix. Based on 
     ```
 3. **Activate Virtual Environment**:
     ```
-    venv\Scripts\activate# On Windows
+    venv\Scripts\activate    #On Windows
     # or
-    source venv/bin/activate  # On macOS/Linux
+    source venv/bin/activate    #On macOS/Linux
     ```
 4. **Install Dependencies**:
     ```
