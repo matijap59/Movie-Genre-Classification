@@ -2,7 +2,7 @@
 
 # Project Description
 
-The goal of this project is to develop an algorithm for determining a movie's genre based on its description. Natural language processing techniques were used to analyze textual descriptions, and movies were classified into appropriate genres.
+The goal of this project is to develop an algorithm for determining a movie's genre based on its description. Natural language processing techniques were used to analyze textual descriptions, and movies were classified into appropriate genres. The attached **RI-project-specification.pdf** provides a detailed project description and outlines the procedures used to solve the given problems.
 
 # Algorithms
 1. **K-Nearest Neighbors**
