@@ -30,6 +30,8 @@ class NB_Sentiment_Classifier:
         self.genres=y
         self.categories=extract_unique_genres(self.genres)
 
+        print(self.genres)
+
         reviews={}
         for i in range(len(self.text)):
             text = self.text.iloc[i]['Text_cleaning']
